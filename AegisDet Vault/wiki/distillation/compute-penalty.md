@@ -1,0 +1,35 @@
+---
+title: "Compute Penalty"
+project: "AegisDet-Pro v5.1"
+area: "distillation"
+status: "specification"
+tags: ["distillation"]
+---
+
+# Compute Penalty
+
+## Purpose
+Define the training-only method for the project concern named “Compute Penalty” and its measurable effect on the AegisDet research question.
+
+## Project specification
+Specify teacher checkpoint, class mapping, cached versus online outputs, student checkpoint, loss formula, temperature/weight, schedule, hard-example policy, and baseline with no KD. Distillation must not alter inference architecture unless separately declared.
+
+## Evidence required
+- Teacher quality evaluated
+- No-KD control
+- Loss and schedule recorded
+- Training stability plots
+- Student accuracy and unchanged inference latency
+
+## Decision rule
+Keep only a distillation term that provides reproducible student benefit. A larger training loss stack is not automatically better.
+
+## Next action
+- [ ] Convert this specification into the active phase artifact only when [[TASKS]] unlocks it.
+
+## Related notes
+- [[experiments/distillation/exp-040-single-teacher-kd]]
+- [[research/papers/progressive-multi-teacher-distillation]]
+
+## Retrieval terms
+aegisdet, compute, edge-ai, penalty.

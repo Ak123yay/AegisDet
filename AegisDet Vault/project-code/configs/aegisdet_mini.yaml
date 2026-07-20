@@ -1,0 +1,15 @@
+model: runs/baseline_yolo26n/weights/best.pt
+imgsz: 416
+confidence: 0.20
+router:
+  small_area_ratio: 0.015
+  small_count_trigger: 1
+  uncertain_low: 0.20
+  uncertain_high: 0.50
+  uncertain_count_trigger: 2
+crop_refine:
+  max_crops: 2
+  padding_fraction: 0.35
+  minimum_crop_pixels: 24
+merge:
+  iou_threshold: 0.50

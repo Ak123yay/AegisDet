@@ -1,0 +1,13 @@
+# Update path before training. Do not commit private images.
+path: ./data/wildlife
+train: images/train
+val: images/val
+test: images/test
+names:
+  0: cat
+  1: dog
+  2: bobcat
+  3: deer
+  4: opossum
+  5: raccoon
+  6: squirrel

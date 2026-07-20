@@ -1,0 +1,7 @@
+{
+  "search": "-path:archive -path:project-code/runs",
+  "showTags": true,
+  "showAttachments": false,
+  "showOrphans": false,
+  "showArrow": true
+}
