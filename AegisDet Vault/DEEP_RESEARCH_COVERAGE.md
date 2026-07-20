@@ -19,7 +19,7 @@
 | Ablations | [[wiki/experiments/_experiments-moc]] |
 | Timeline and gates | [[BUILD_PATH]], `wiki/timeline/` |
 | Claims and limitations | [[AegisDet_Design/claims-and-non-claims]] |
-| Starter implementation | [[wiki/implementation/starter-code-guide]], `project-code/` |
+| Starter implementation | [[wiki/implementation/starter-code-guide]], `../aegisdet/` |
 
 ## Coverage policy
 

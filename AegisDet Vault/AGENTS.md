@@ -1,31 +1,87 @@
-# AGENTS.md — Vault Operating Contract
+# AGENTS.md — AegisDet Knowledge Vault
 
-## Mandatory initialization
+## Purpose
 
-1. Read `TASKS.md`.
-2. Read `CURRENT_STATE.md`.
-3. Read `CONTEXT_LOCK.md`.
-4. Read `FOUNDATION_MODEL.md` and `DOMAIN_LOCK.md`.
-5. Read `wiki/_master-index.md` and `wiki/_code-map.md`.
-6. Open the note for the first unchecked task.
+This folder is the private knowledge, planning, decision, and experiment-record system. Actual implementation belongs in the sibling `../aegisdet/` folder.
 
-## File ownership
+## Read order
 
-- Production code: `project-code/` only.
-- Structured knowledge: `wiki/` only.
-- Unprocessed material: `raw/`.
-- Generated reports: `output/`.
-- Historical material: `archive/`.
+1. `TASKS.md`
+2. `CURRENT_STATE.md`
+3. `CONTEXT_LOCK.md`
+4. `PROJECT_CONTEXT.md`
+5. `FOUNDATION_MODEL.md`
+6. `TEACHER_MODELS.md`
+7. `wiki/_master-index.md`
+8. `wiki/_code-map.md`
+9. Notes relevant to the first active task
 
-## Work rules
+## Source priority
 
-- Implement only the active task unless explicitly told otherwise.
-- Never invent metrics, citations, dataset sizes, or completed experiments.
-- Before coding, confirm the target path in `_code-map.md`.
-- After coding, update `TASKS.md`, `logs/code-changes.md`, and the corresponding experiment note.
-- Every experiment must record hypothesis, frozen controls, config, dataset version, commit, hardware, runtime, raw outputs, result, and conclusion.
-- New architecture modules require an ADR and an experiment plan.
+1. `TASKS.md`
+2. `CONTEXT_LOCK.md`
+3. `CURRENT_STATE.md`
+4. Accepted ADRs
+5. Project/model/domain lock files
+6. Structured wiki notes
+7. Generated state files
+8. `raw/`
 
-## Context reset
+Generated state may report file activity but cannot override a manual architecture decision or experiment result.
 
-When context is unclear, rebuild it from root control files. Do not rely on conversational memory over the vault.
+## Allowed content
+
+- Markdown knowledge
+- task state and evidence
+- architecture specifications
+- research notes and citations
+- human-readable experiment plans and conclusions
+- decisions, logs, indexes, diagrams, and lightweight documentation assets
+
+## Prohibited content
+
+- production Python
+- executable training or inference scripts
+- datasets or private images
+- model checkpoints
+- cached teacher targets
+- ONNX or TensorRT files
+- large run directories
+
+## Work-state rules
+
+- `TASKS.md` is authoritative.
+- Complete the first unchecked, non-deferred task in the active phase.
+- Every completed task needs an entry in `TASK_EVIDENCE.md`.
+- Do not mark training, evaluation, or benchmarks complete without actual output.
+- Preserve rejected experiments.
+- Update indexes rather than creating duplicate canonical notes.
+
+## Automatic synchronization
+
+Mechanical code state is updated by the sibling repository's hooks and watcher:
+
+- `AUTO_STATE.md`
+- generated blocks in `TASKS.md` and `CURRENT_STATE.md`
+- `logs/auto-code-changes.md`
+- `wiki/_code-inventory.generated.md`
+
+Do not manually edit generated files or text between AUTO markers.
+
+Semantic updates must be made with:
+
+```bash
+cd ../aegisdet
+python tools/workspace_sync.py record --task TASK-ID --status complete \
+  --summary "What changed" --verification "How it was verified"
+```
+
+## End-of-session requirement
+
+Ensure:
+
+- task state is accurate,
+- evidence exists,
+- code changes are logged,
+- experiment notes state planned/running/completed correctly,
+- the next task is explicit.

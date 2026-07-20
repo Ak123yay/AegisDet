@@ -9,4 +9,4 @@ The internal representation is intentionally independent of Ultralytics so route
 - `CropRegion`: padded crop box plus the triggering detection.
 - `PipelineOutput`: final, base, and crop detections plus route and crops.
 
-Implementation: `project-code/src/aegisdet/types.py`.
+Implementation: `../aegisdet/src/aegisdet/types.py`.

@@ -14,7 +14,7 @@ tags: ["roadmap"]
 
 1. Install Python 3.11 and create `.venv`.
 2. Install CUDA-compatible PyTorch separately using the official PyTorch selector.
-3. Install `project-code/requirements.txt`.
+3. Install `../aegisdet/requirements.txt`.
 4. Run `python scripts/check_environment.py`.
 5. Run a pretrained YOLO26n prediction on one image.
 6. Freeze `pip freeze` to `requirements-lock.txt`.

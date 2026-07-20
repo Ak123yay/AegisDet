@@ -1,17 +1,9 @@
 # Vault Audit Procedure
 
-Run `python project-code/scripts/audit_vault.py` from the vault root.
+Run the workspace verifier from the workspace root:
 
-## Checks
+```powershell
+python verify_workspace.py
+```
 
-- required root control files;
-- Markdown and directory counts;
-- empty or tiny notes;
-- unresolved and ambiguous Obsidian links;
-- duplicate filenames/stems;
-- repeated placeholder boilerplate;
-- Python syntax compilation;
-- unit-test result;
-- expected ZIP root name.
-
-The generated report is stored in `output/VAULT_AUDIT.md`. A clean audit does not mean experiments are complete; it means the knowledge and starter implementation are internally consistent.
+The verifier checks the required folder separation, confirms that `AegisDet Vault/project-code` does not exist, scans the vault for obsolete embedded-code references, checks required control files, and can run the code repository unit tests when dependencies are available.

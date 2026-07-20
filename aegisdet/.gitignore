@@ -1,0 +1,37 @@
+# Python
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Environment and IDE
+.env
+.vscode/
+.idea/
+
+# Models and generated artifacts
+*.pt
+*.pth
+*.ckpt
+*.onnx
+*.engine
+*.trt
+runs/
+reports/*.json
+reports/*.csv
+
+# Local data
+/data/images/
+/data/labels/
+/data/cache/
+
+# Notebooks
+.ipynb_checkpoints/
+
+# OS
+.DS_Store
+Thumbs.db
+.aegisdet/
+*.pyc

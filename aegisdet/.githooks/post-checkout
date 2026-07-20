@@ -1,0 +1,6 @@
+#!/usr/bin/env sh
+if command -v python >/dev/null 2>&1; then
+  python tools/workspace_sync.py sync --reason post-checkout || true
+elif command -v py >/dev/null 2>&1; then
+  py -3 tools/workspace_sync.py sync --reason post-checkout || true
+fi

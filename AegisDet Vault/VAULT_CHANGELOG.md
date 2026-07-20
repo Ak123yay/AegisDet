@@ -26,3 +26,11 @@ This release is “perfected” as an execution system and starter implementatio
 - Added progressive and quality-aware dual-teacher experiments.
 - Added train-only cached-target requirements and hardware-safe sequencing.
 - Removed the unsupported YOLO26 preprint reference; official Ultralytics documentation is canonical.
+
+
+## 2026-07-20 — Workspace separation
+
+- Removed the embedded code directory from the vault.
+- Moved starter implementation into the sibling public `../aegisdet/` repository.
+- Updated the vault code map and all project-code path references.
+- Added workspace-level agent rules, VS Code multi-root configuration, setup script, external data/artifact folders, and verification tooling.

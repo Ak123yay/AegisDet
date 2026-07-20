@@ -10,4 +10,4 @@ Owns box area, relative area, IoU, image-bound clamping, padding, and crop-to-im
 - remapping adds crop origin exactly once;
 - geometry functions are pure and unit tested.
 
-Implementation: `project-code/src/aegisdet/geometry.py`.
+Implementation: `../aegisdet/src/aegisdet/geometry.py`.

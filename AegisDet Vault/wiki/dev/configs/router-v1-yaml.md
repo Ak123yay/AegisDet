@@ -12,7 +12,7 @@ tags: ["configuration"]
 Define every parameter required by the configuration `router-v1.yaml`.
 
 ## Project specification
-The real machine-readable config belongs in `project-code/configs/`. This note explains ownership and expected fields: model/checkpoint, data version, image size, training or inference parameters, router thresholds, crop limits, merge policy, precision, device, seed, output name, and phase.
+The real machine-readable config belongs in `../aegisdet/configs/`. This note explains ownership and expected fields: model/checkpoint, data version, image size, training or inference parameters, router thresholds, crop limits, merge policy, precision, device, seed, output name, and phase.
 
 No experiment may be identified only by a run-folder name; the exact config must be archived with results.
 

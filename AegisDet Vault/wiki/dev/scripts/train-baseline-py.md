@@ -12,7 +12,7 @@ tags: ["script-spec"]
 Specify the command-line contract and outputs for `train_baseline.py`.
 
 ## Project specification
-The implementation belongs in `project-code/scripts/`. It must expose explicit arguments, validate paths and required dependencies, fail with useful errors, print or save structured metadata, and avoid hidden global state. The script should be rerunnable from the project-code root.
+The implementation belongs in `../aegisdet/scripts/`. It must expose explicit arguments, validate paths and required dependencies, fail with useful errors, print or save structured metadata, and avoid hidden global state. The script should be rerunnable from the sibling aegisdet repository root.
 
 Research scripts must preserve model, dataset, config, device, runtime, precision, command, and output location.
 

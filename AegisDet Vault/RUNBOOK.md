@@ -1,35 +1,43 @@
-# AegisDet Runbook
+# RUNBOOK.md — Local Development
 
-## Phase 0 commands
+Run commands from the workspace root unless a command changes directory.
+
+## Open the workspace
 
 ```powershell
-cd "AegisDet Vault\project-code"
-python -m venv .venv
+code "aegisdet.code-workspace"
+```
+
+Open `AegisDet Vault/` separately in Obsidian.
+
+## Create the code environment
+
+```powershell
+cd aegisdet
+powershell -ExecutionPolicy Bypass -File scripts/bootstrap_windows.ps1
+```
+
+Install the CUDA-compatible PyTorch build recommended by PyTorch for the local NVIDIA setup, then:
+
+```powershell
 .\.venv\Scripts\Activate.ps1
-# Install the CUDA PyTorch command selected at pytorch.org
 pip install -r requirements.txt
 pip install -e .
-python scripts/check_environment.py | Tee-Object ..\output\environment-check.txt
+python scripts/check_environment.py
 python -m unittest discover -s tests -v
 ```
 
-## Phase 1 commands
+## External path variables
 
-After editing `data/wildlife.yaml` and completing the data audit:
+Copy `.env.example` to `.env` in the code repository and keep `.env` untracked.
 
-```powershell
-python scripts/train_baseline.py --config configs/baseline_yolo26n.yaml
-python scripts/evaluate_baseline.py --model runs/baseline_yolo26n/weights/best.pt --data data/wildlife.yaml
-python scripts/export_onnx.py --model runs/baseline_yolo26n/weights/best.pt
+```text
+AEGISDET_DATA_ROOT=../data
+AEGISDET_ARTIFACT_ROOT=../artifacts
+AEGISDET_CACHE_ROOT=../cache
+AEGISDET_VAULT_ROOT=../AegisDet Vault
 ```
 
-## Phase 2 commands
+## Public GitHub repository
 
-```powershell
-python scripts/run_aegisdet_mini.py --model runs/baseline_yolo26n/weights/best.pt --image path\to\image.jpg
-python scripts/benchmark_latency.py --model runs/baseline_yolo26n/weights/best.pt --images data\wildlife\images\test
-```
-
-## Run discipline
-
-Before each experiment, create or update its wiki note with the hypothesis and frozen setup. Afterward, attach the raw output, update TASKS, and write a keep/modify/remove conclusion.
+Initialize and publish only the `aegisdet/` folder. Do not publish the entire workspace or private vault automatically.
