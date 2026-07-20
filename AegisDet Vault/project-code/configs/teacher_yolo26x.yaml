@@ -1,0 +1,17 @@
+# Phase 6 specification only. Do not run until TASKS unlocks Phase 6.
+teacher:
+  name: yolo26x
+  checkpoint: yolo26x.pt
+  role: primary_same_family
+  input_size: 640
+  fine_tune_on_domain: true
+  cache_train_outputs: true
+  cache_validation_outputs: false
+student:
+  source: locked_final_pre_kd_student
+distillation:
+  class_targets: true
+  box_targets: true
+  selected_feature_targets: false
+notes:
+  - Enable selected feature transfer only after output-level KD works.

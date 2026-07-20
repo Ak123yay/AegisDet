@@ -1,0 +1,18 @@
+# Phase 6 specification only. Do not run until TASKS unlocks Phase 6.
+teacher:
+  name: rtdetrv4x
+  role: secondary_architecture_diverse
+  checkpoint: null  # fill with frozen fine-tuned checkpoint path
+  input_size: 640
+  fine_tune_on_domain: true
+  cache_train_outputs: true
+  cache_validation_outputs: false
+fallback:
+  name: rtdetrv2x
+  allowed_only_after_documented_blocker: true
+distillation:
+  class_targets: true
+  box_targets: true
+  direct_feature_targets: false
+notes:
+  - Begin with common output-level targets.

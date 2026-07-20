@@ -1,0 +1,29 @@
+# Phase 6 experiment specification. All weights remain TBD until ablation.
+student:
+  checkpoint: null
+teachers:
+  stage_1:
+    name: yolo26x
+    cached_targets: null
+  stage_2:
+    name: rtdetrv4x
+    cached_targets: null
+controls:
+  require_no_kd: true
+  require_yolo26x_only: true
+  require_rtdetrv4x_only: true
+  equal_total_training_budget: true
+dual_teacher:
+  enabled: false  # unlock only if both teachers independently help
+  fusion: quality_aware
+  use_agreement_targets: true
+  drop_low_confidence_conflicts: true
+loss_weights:
+  ground_truth: 1.0
+  yolo_class: null
+  yolo_box: null
+  detr_class: null
+  detr_box: null
+  hard_example: null
+inference:
+  teachers_required: false

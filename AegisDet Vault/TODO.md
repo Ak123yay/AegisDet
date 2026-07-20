@@ -49,10 +49,16 @@
 - [ ] Calibrate threshold.
 
 ## Phase 6 — Distillation
-- [ ] Select teacher.
-- [ ] Test single-teacher KD.
-- [ ] Test progressive KD.
+- [ ] Fine-tune and validate YOLO26x (`yolo26x.pt`) as the primary teacher.
+- [ ] Fine-tune and validate RT-DETRv4-X as the secondary teacher.
+- [ ] Generate train-only cached targets with checkpoint hashes.
+- [ ] Run the no-KD equal-budget control.
+- [ ] Test YOLO26x-only KD.
+- [ ] Test RT-DETRv4-X-only KD.
+- [ ] Test progressive YOLO26x → RT-DETRv4-X KD.
+- [ ] Test quality-aware dual-teacher KD only if both single teachers help.
 - [ ] Test hard-example KD.
+- [ ] Confirm the deployed student graph and latency are unchanged.
 
 ## Phase 7 — Deployment
 - [ ] Benchmark OpenCV 5 DNN.

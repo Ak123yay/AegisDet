@@ -1,59 +1,70 @@
 ---
-title: "EXP 040 — Single-Teacher Distillation"
+title: "EXP 040 — YOLO26x Single-Teacher Distillation"
 project: "AegisDet-Pro v5.1"
 area: "experiment"
 phase: "Phase 6"
 status: "blocked"
-tags: ["experiment", "phase-6"]
+tags: ["experiment", "phase-6", "yolo26x"]
 ---
 
-# EXP 040 — Single-Teacher Distillation
+# EXP 040 — YOLO26x Single-Teacher Distillation
 
 ## Research question
-Does a stronger compatible teacher improve the fixed AegisDet student without inference cost?
+
+Does a domain-fine-tuned YOLO26x teacher improve the fixed AegisDet student without changing inference cost?
 
 ## Hypothesis
-A YOLO26s teacher may improve student logits/localization with a simpler stable baseline before progressive KD.
+
+YOLO26x is the most compatible first teacher because it shares the YOLO26 family with the YOLO26n-derived student.
 
 ## Frozen control
-Final pre-KD student architecture/data/training budget and no-KD run.
+
+Final pre-KD student architecture, dataset, augmentation, total epochs, and no-KD seed-matched run.
 
 ## Independent variable
-One teacher and a minimal declared KD loss.
+
+YOLO26x output-level distillation:
+- class/logit term,
+- box/IoU term,
+- optional high-confidence missed-object recovery.
 
 ## Procedure
-1. Evaluate teacher domain quality.
-2. Map classes/outputs.
-3. Train no-KD and KD matched runs.
-4. Track loss stability.
-5. Evaluate final student and confirm unchanged inference graph.
+
+1. Fine-tune YOLO26x on the locked training split.
+2. Evaluate and calibrate it on validation.
+3. Freeze the checkpoint and hash.
+4. Generate cached targets for training images.
+5. Train no-KD and KD matched runs.
+6. Confirm the student inference graph and latency remain unchanged.
 
 ## Required metrics
-- student mAP/hard metrics
-- training stability
-- inference latency parity
-- teacher/student disagreement
-- per-class gains
+
+- student mAP50-95,
+- small-object AP and recall,
+- per-class change,
+- calibration,
+- training stability,
+- inference latency parity,
+- teacher-student disagreement.
 
 ## Acceptance criterion
-Keep only if student benefit is reproducible without inference overhead or severe training instability.
 
-## Rejection or rollback criterion
-Reject if teacher errors transfer, result is seed-sensitive, or complexity is not justified.
+Keep if the gain is reproducible across at least two seeds or is large enough to justify a confirmatory run, with no inference overhead.
 
 ## Required outputs
-- `reports/single_teacher_kd.json`
-- `configs/kd_single_locked.yaml`
-- `reports/kd_failures/`
+
+- `reports/yolo26x_single_teacher_kd.json`
+- `reports/yolo26x_teacher_validation.json`
+- `configs/kd_yolo26x_locked.yaml`
+- cached-target manifest with teacher checkpoint hash
 
 ## Result
 
-**Not run.** Do not fill this section from expected values or paper results.
-
-## Conclusion
-
-Pending execution. Final wording must be keep, modify, or remove with evidence.
+**Not run.** Do not use official COCO values as project results.
 
 ## Related notes
+
+- [[TEACHER_MODELS]]
 - [[distillation/teacher-selection]]
 - [[distillation/logit-distillation]]
+- [[distillation/box-distillation]]

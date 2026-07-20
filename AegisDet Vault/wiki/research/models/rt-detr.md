@@ -1,36 +1,41 @@
 ---
-title: "RT-DETR"
+title: "RT-DETR Family"
 project: "AegisDet-Pro v5.1"
 area: "research-model"
-status: "teacher-candidate"
-tags: ["research-model", "source-backed"]
+status: "accepted-reference"
+tags: ["research-model", "source-backed", "rt-detr"]
 ---
 
-# RT-DETR
+# RT-DETR Family
 
 ## Summary
-RT-DETR is a possible stronger teacher, not the initial deployment student.
 
-## What the source establishes
-It is a real-time end-to-end transformer detector and may provide global localization/classification supervision.
+RT-DETR is an end-to-end real-time detector family. AegisDet uses the newest locked teacher variant, RT-DETRv4-X, while retaining RT-DETRv2-X as a fallback.
 
 ## AegisDet use
-Evaluate it as a teacher only after a same-family YOLO teacher baseline exists.
+
+- RT-DETRv4-X: secondary architecture-diverse teacher.
+- RT-DETRv2-X: fallback teacher only.
+- Neither model is the edge student.
+- Neither teacher is used during final inference.
+
+## Why it is useful
+
+The DETR-family representation and matching behavior differ from YOLO26, creating a plausible source of complementary supervision.
 
 ## What not to copy blindly
-Do not replace the student with a DETR decoder or assume heterogeneous distillation will work automatically.
 
-## Implementation consequence
-Cache teacher outputs, map classes exactly, and compare student gains against teacher cost-free inference.
-
-## Required evaluation
-Teacher domain accuracy, distillation stability, student result, and training cost.
+Do not replace the student with a DETR decoder. Do not assume heterogeneous feature distillation will work. Begin with common output-level boxes and class distributions.
 
 ## Sources
+
+- https://github.com/RT-DETRs/RT-DETRv4
+- https://arxiv.org/abs/2510.25257
+- https://github.com/lyuwenyu/RT-DETR
+- https://arxiv.org/abs/2407.17140
 - https://arxiv.org/abs/2304.08069
 
 ## Related notes
-- [[distillation/teacher-selection]]
 
-## Status rule
-The source summary is evidence; AegisDet performance remains a hypothesis until its own experiment is run.
+- [[research/models/rt-detrv4-x]]
+- [[distillation/teacher-selection]]

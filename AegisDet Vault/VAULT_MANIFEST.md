@@ -41,3 +41,13 @@
 ## Honesty boundary
 
 This vault is complete as a knowledge system, implementation starter, and experimental path. Accuracy, latency, power, and model-comparison results remain unfilled until the actual runs are completed.
+
+## v1.1 dual-teacher update
+
+- Primary teacher: YOLO26x (`yolo26x.pt`)
+- Secondary teacher: RT-DETRv4-X
+- Fallback: RT-DETRv2-X only after documented blocker
+- Teachers are training-only
+- Markdown files after update: 389
+- Total files after update: 426
+- Link audit after update: 0 unresolved, 0 ambiguous

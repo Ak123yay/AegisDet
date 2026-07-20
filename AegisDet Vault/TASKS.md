@@ -53,6 +53,6 @@ Execution rule: complete the first unchecked task. Do not jump to later phases.
 - [ ] Phase 3: hard-negative active learning and dataset v2.
 - [ ] Phase 4: K-token global context and placement ablations.
 - [ ] Phase 5: learned router and compute penalty.
-- [ ] Phase 6: distillation.
+- [ ] Phase 6: YOLO26x + RT-DETRv4-X progressive and quality-aware multi-teacher distillation.
 - [ ] Phase 7: ONNX, OpenCV 5, ORT, OpenVINO, TensorRT, PTQ/QAT.
 - [ ] Phase 8: final ablations, report, release, and demo.

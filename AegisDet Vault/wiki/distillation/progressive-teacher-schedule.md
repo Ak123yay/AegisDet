@@ -2,34 +2,61 @@
 title: "Progressive Teacher Schedule"
 project: "AegisDet-Pro v5.1"
 area: "distillation"
-status: "specification"
-tags: ["distillation"]
+status: "locked-specification"
+tags: ["distillation", "progressive-kd", "multi-teacher"]
 ---
 
 # Progressive Teacher Schedule
 
-## Purpose
-Define the training-only method for the stronger detector used to provide soft or feature supervision.
+## Stage 0 — Ground-truth-only control
 
-## Project specification
-Specify teacher checkpoint, class mapping, cached versus online outputs, student checkpoint, loss formula, temperature/weight, schedule, hard-example policy, and baseline with no KD. Distillation must not alter inference architecture unless separately declared.
+Train the fixed student architecture without distillation. Preserve this checkpoint and training budget as the mandatory control.
 
-## Evidence required
-- Teacher quality evaluated
-- No-KD control
-- Loss and schedule recorded
-- Training stability plots
-- Student accuracy and unchanged inference latency
+## Stage 1 — YOLO26x
 
-## Decision rule
-Keep only a distillation term that provides reproducible student benefit. A larger training loss stack is not automatically better.
+Distill from the fine-tuned YOLO26x teacher.
 
-## Next action
-- [ ] Convert this specification into the active phase artifact only when [[TASKS]] unlocks it.
+Initial losses:
+- class/logit distillation,
+- box or IoU-aware localization distillation,
+- high-confidence missed-object recovery.
 
-## Related notes
-- [[experiments/distillation/exp-040-single-teacher-kd]]
-- [[research/papers/progressive-multi-teacher-distillation]]
+Selected feature distillation is optional only after output-level KD demonstrates value.
 
-## Retrieval terms
-aegisdet, edge-ai, progressive, schedule, teacher.
+## Stage 2 — RT-DETRv4-X
+
+Continue from the best Stage 1 student or run a matched independent RT-DETRv4-X-only control.
+
+Initial transfer:
+- class distributions,
+- matched boxes,
+- difficult-object targets,
+- disagreement-based hard-example weighting.
+
+Avoid direct feature matching initially because the DETR and YOLO internal structures are heterogeneous.
+
+## Stage 3 — Quality-aware dual teacher
+
+Use both teachers only after they independently improve the student.
+
+Fusion rules:
+- trust teacher agreement strongly,
+- choose a teacher per object/frame using validation-calibrated reliability,
+- use disagreement as a signal for hard-example review,
+- reject low-confidence or contradictory pseudo labels,
+- never average boxes merely because two teachers emitted them.
+
+## Equal-budget requirement
+
+The progressive schedule must be compared to:
+- the same number of total epochs without KD,
+- the best single-teacher run with the same compute budget,
+- and a fresh-seed repeat.
+
+## Hardware strategy
+
+Prefer cached output targets to running both X-size teachers online. Train or infer teachers one at a time. Online feature KD is a separate optional experiment.
+
+## Acceptance rule
+
+Progressive KD stays only if it produces a reproducible gain beyond the strongest equal-budget single-teacher result while preserving the final student inference graph.

@@ -16,3 +16,13 @@
 ## Honesty boundary
 
 This release is “perfected” as an execution system and starter implementation. It does not fabricate dataset statistics or model results that do not exist yet.
+
+## 2026-07-19 — Dual-teacher plan locked
+
+- Corrected the official teacher name from “YOLO26 XL” to YOLO26x (`yolo26x.pt`).
+- Locked YOLO26x as the primary same-family teacher.
+- Locked RT-DETRv4-X as the secondary architecture-diverse teacher.
+- Retained RT-DETRv2-X as a documented fallback only.
+- Added progressive and quality-aware dual-teacher experiments.
+- Added train-only cached-target requirements and hardware-safe sequencing.
+- Removed the unsupported YOLO26 preprint reference; official Ultralytics documentation is canonical.

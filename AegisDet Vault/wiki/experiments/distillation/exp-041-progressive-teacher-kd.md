@@ -1,58 +1,69 @@
 ---
-title: "EXP 041 — Progressive Teacher Distillation"
+title: "EXP 041 — Progressive YOLO26x to RT-DETRv4-X Distillation"
 project: "AegisDet-Pro v5.1"
 area: "experiment"
 phase: "Phase 6"
 status: "blocked"
-tags: ["experiment", "phase-6"]
+tags: ["experiment", "phase-6", "progressive-kd"]
 ---
 
-# EXP 041 — Progressive Teacher Distillation
+# EXP 041 — Progressive YOLO26x to RT-DETRv4-X Distillation
 
 ## Research question
-Does a sequence of teachers outperform the single-teacher KD baseline?
+
+Does a progressive sequence of YOLO26x followed by RT-DETRv4-X outperform the strongest equal-budget single-teacher run?
 
 ## Hypothesis
-Gradual transfer from a close teacher to a stronger or heterogeneous teacher may reduce mismatch.
+
+The same-family teacher can stabilize class and localization transfer first; the architecture-diverse teacher may then improve hard cases and global context.
 
 ## Frozen control
-Locked student, data, budget, and best single-teacher recipe.
+
+Locked student, data, augmentation, total training budget, best YOLO26x-only result, and RT-DETRv4-X-only result.
 
 ## Independent variable
-Teacher sequence/order and stage schedule.
+
+Teacher sequence and stage allocation:
+1. YOLO26x,
+2. RT-DETRv4-X.
 
 ## Procedure
-1. Define teacher sequence and stage checkpoints.
-2. Train matched total-budget control.
-3. Preserve intermediate student states.
-4. Compare final and stage-wise behavior.
-5. Analyze whether gains come from extra training time.
+
+1. Fine-tune and freeze both teachers.
+2. Cache output-level targets separately.
+3. Train the YOLO26x stage.
+4. Continue with RT-DETRv4-X hard-case/output KD.
+5. Preserve intermediate checkpoints.
+6. Compare against equal-total-epoch controls.
+7. Repeat the best configuration with a fresh seed.
 
 ## Required metrics
-- student accuracy/hard metrics
-- total training compute
-- stage stability
-- inference parity
-- comparison with equal-budget single teacher
+
+- final student accuracy,
+- small/occluded/low-light subset results,
+- total training compute,
+- stage-wise stability,
+- teacher disagreement,
+- calibration,
+- inference parity.
 
 ## Acceptance criterion
-Keep only if it beats the equal-budget single-teacher control reproducibly.
 
-## Rejection or rollback criterion
-Reject if improvement is attributable only to extra epochs or if heterogeneous transfer destabilizes localization.
+Keep only if it beats the best equal-budget single-teacher control reproducibly.
 
 ## Required outputs
-- `reports/progressive_kd.json`
+
+- `reports/progressive_yolo26x_rtdetrv4x_kd.json`
 - `reports/kd_stage_metrics.csv`
-- `configs/kd_progressive_locked.yaml`
+- `configs/kd_progressive_yolo26x_rtdetrv4x.yaml`
 
 ## Result
 
-**Not run.** Do not fill this section from expected values or paper results.
-
-## Conclusion
-
-Pending execution. Final wording must be keep, modify, or remove with evidence.
+**Not run.**
 
 ## Related notes
-- [[research/papers/progressive-multi-teacher-distillation]]
+
+- [[TEACHER_MODELS]]
+- [[distillation/progressive-teacher-schedule]]
+- [[research/models/yolo26x]]
+- [[research/models/rt-detrv4-x]]

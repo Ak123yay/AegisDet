@@ -28,7 +28,6 @@ Prediction parity, mAP50-95, small-object metrics, p50/p90/p99 latency, model si
 
 ## Sources
 - https://docs.ultralytics.com/models/yolo26/
-- https://arxiv.org/abs/2606.03748
 - https://github.com/ultralytics/ultralytics
 
 ## Related notes

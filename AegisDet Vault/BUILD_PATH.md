@@ -64,7 +64,7 @@ Build labels from whether optional processing actually corrected each baseline f
 
 ## Phase 6 — Distillation
 
-Start with one compatible YOLO teacher. Test progressive teacher distillation only after a single-teacher baseline. Distillation must improve the student without adding inference cost.
+Use **YOLO26x (`yolo26x.pt`)** as the primary same-family teacher and **RT-DETRv4-X** as the secondary architecture-diverse teacher. Fine-tune and freeze both teachers on the domain dataset. Establish no-KD, YOLO26x-only, and RT-DETRv4-X-only controls before progressive YOLO26x → RT-DETRv4-X training. Test quality-aware dual-teacher fusion only after both teachers provide independent value. Prefer cached output targets; do not require either teacher at inference.
 
 ## Phase 7 — Deployment
 

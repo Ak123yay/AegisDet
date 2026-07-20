@@ -19,6 +19,8 @@ tags: ["status"]
 - YOLO26n locked as primary base detector.
 - Wildlife/roadside domain and initial class taxonomy locked.
 - OpenCV 5 DNN added as a CPU deployment benchmark.
+- YOLO26x locked as the primary same-family teacher.
+- RT-DETRv4-X locked as the secondary architecture-diverse teacher; RT-DETRv2-X is fallback only.
 - Detailed research plan imported into `raw/` and `attachments/`.
 - Starter implementation and unit tests included in `project-code/`.
 

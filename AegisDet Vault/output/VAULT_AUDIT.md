@@ -75,3 +75,15 @@ OK
 ## Interpretation
 
 A PASS means the vault and starter code are internally consistent. It does not mean model experiments have been completed or that AegisDet has beaten its baseline.
+
+## v1.1 teacher-plan audit
+
+- Official YOLO teacher filename normalized to `yolo26x.pt`
+- RT-DETRv4-X source note added
+- Progressive and quality-aware dual-teacher experiments added
+- Teacher configs added
+- Unsupported YOLO26 preprint reference removed
+- Markdown files: 389
+- Total files: 426
+- Unresolved links: 0
+- Ambiguous links: 0
